@@ -11,9 +11,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Display message
         run: echo "First Work Flow"
-
-      - name: Gradle Build
-        uses: gradle/gradle-build-action@v3
+      - name: Run build in a subdirectory
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          build-root-directory: user-micro-service
+          arguments: 'build'
