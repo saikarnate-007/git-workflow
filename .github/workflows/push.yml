@@ -13,7 +13,18 @@ jobs:
         uses: actions/checkout@v3
       - name: Display message
         run: echo "First Work Flow"
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17' # Specify your required Java version
+          distribution: 'temurin'
+          cache: 'gradle' # Enables caching for Gradle dependencies
       - name: Run build in a subdirectory
         uses: gradle/actions/setup-gradle@v3
         with:
           arguments: 'build'
+      - name: Upload JAR as artifact
+        uses: actions/upload-artifact@v4
+        with:
+            name: user-micro-service
+            path: build/libs/*.jar
