@@ -43,4 +43,4 @@ jobs:
         with:
             context: .
             push: true
-            tags: ${{ secrets.GIT_DOCKERHUB_TOKEN }}/user-micro-service:latest
+            tags: ${{ secrets.GIT_DOCKERHUB_USERNAME }}/user-micro-service:latest
