@@ -1,0 +1,20 @@
+version: '3'
+services:
+  user-service:
+    build:
+      context: .
+      dockerfile: |
+        # Build stage
+        FROM gradle:8-jdk17 as builder
+        WORKDIR /app
+        COPY . .
+        RUN gradle build -x test
+
+        # Runtime stage
+        FROM eclipse-temurin:17-jre-alpine
+        WORKDIR /app
+        COPY --from=builder /app/build/libs/*.jar user-micro-service.jar
+        EXPOSE 8080
+        ENTRYPOINT ["java", "-jar", "user-micro-service.jar"]
+    ports:
+      - "8081:8080"
