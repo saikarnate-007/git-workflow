@@ -8,5 +8,4 @@ RUN gradle build -x test
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar user-micro-service.jar
-EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "user-micro-service.jar"]
